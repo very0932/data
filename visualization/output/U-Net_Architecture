@@ -1,0 +1,66 @@
+digraph "U-Net Architecture" {
+	nodesep=0.8 rankdir=TB ranksep=1.2 splines=ortho
+	node [fontname=Arial fontsize=14 shape=circle style=filled]
+	edge [arrowhead=vee arrowsize=0.8]
+	Input [label="Input Image
+(3xHxW)" color=blue height=0.8 shape=ellipse width=1.2]
+	Conv1 [label="Conv Block 1
+(64xHxW)" color=orange]
+	Input -> Conv1
+	MaxPool1 [label="MaxPool
+(64xH/2xW/2)" color=green]
+	Conv1 -> MaxPool1
+	Conv2 [label="Conv Block 2
+(128xH/2xW/2)" color=red]
+	MaxPool1 -> Conv2
+	MaxPool2 [label="MaxPool
+(128xH/4xW/4)" color=green]
+	Conv2 -> MaxPool2
+	Conv3 [label="Conv Block 3
+(256xH/4xW/4)" color=brown]
+	MaxPool2 -> Conv3
+	MaxPool3 [label="MaxPool
+(256xH/8xW/8)" color=green]
+	Conv3 -> MaxPool3
+	Conv4 [label="Conv Block 4
+(512xH/8xW/8)" color=red]
+	MaxPool3 -> Conv4
+	MaxPool4 [label="MaxPool
+(512xH/16xW/16)" color=green]
+	Conv4 -> MaxPool4
+	Bottom [label="Conv Block 5
+(1024xH/16xW/16)" color=gray width=1.2]
+	MaxPool4 -> Bottom
+	UpConv4 [label="UpConv 4
+(512xH/8xW/8)" color=purple]
+	Bottom -> UpConv4
+	Conv6 [label="Conv Block 6
+(512xH/8xW/8)" color=orange]
+	UpConv4 -> Conv6
+	Conv4 -> Conv6 [color=gray style=dashed]
+	UpConv3 [label="UpConv 3
+(256xH/4xW/4)" color=purple]
+	Conv6 -> UpConv3
+	Conv7 [label="Conv Block 7
+(256xH/4xW/4)" color=red]
+	UpConv3 -> Conv7
+	Conv3 -> Conv7 [color=gray style=dashed]
+	UpConv2 [label="UpConv 2
+(128xH/2xW/2)" color=purple]
+	Conv7 -> UpConv2
+	Conv8 [label="Conv Block 8
+(128xH/2xW/2)" color=brown]
+	UpConv2 -> Conv8
+	Conv2 -> Conv8 [color=gray style=dashed]
+	UpConv1 [label="UpConv 1
+(64xHxW)" color=pink]
+	Conv8 -> UpConv1
+	Conv9 [label="Conv Block 9
+(64xHxW)" color=gray]
+	UpConv1 -> Conv9
+	Conv1 -> Conv9 [color=gray style=dashed]
+	Output [label="Output
+(CxHxW)" color=yellow height=0.8 shape=ellipse width=1.2]
+	Conv9 -> Output
+	fontname=Arial fontsize=20 label="U-Net Architecture" labelloc=t
+}
